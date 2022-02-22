@@ -1,9 +1,10 @@
+const MENU_PADDING: f32 = 4.0;
 const PADDING: f32 = 25.0;
 const WHITE: Color32 = Color32::from_rgb(255,255,255);
 const CYAN: Color32 = Color32::from_rgb(0,255,255);
 
-use eframe::{
-             egui::{Separator, TopBottomPanel, RichText, Label, Hyperlink, Layout, Color32, Vec2, FontDefinitions, FontData, FontFamily}
+use eframe::{egui,
+             egui::{ Button, Separator, TopBottomPanel, RichText, Label, Hyperlink, Layout, Color32, Vec2, FontDefinitions, FontData, FontFamily}
             };
 
 pub struct Headlines {
@@ -80,5 +81,21 @@ impl Headlines {
         ui.add_space(PADDING);
         let sep = Separator::default().spacing(20.);
         ui.add(sep);
+    }
+    pub fn render_top_panel (&self, ctx: &eframe::egui::CtxRef) {
+        TopBottomPanel::top("top panel").show(ctx, |ui| {
+            ui.add_space(MENU_PADDING);
+            egui::menu::bar(ui, |ui| {
+                ui.with_layout(Layout::left_to_right(), |ui| {
+                    ui.add(Label::new(RichText::new("").heading()));
+                });
+                ui.with_layout(Layout::right_to_left(), |ui| {
+                    ui.add(Button::new(RichText::new("")));
+                    ui.add(Button::new(RichText::new("")));
+                    ui.add(Button::new(RichText::new("")));
+                });
+            });
+            ui.add_space(MENU_PADDING);
+        });
     }
 }

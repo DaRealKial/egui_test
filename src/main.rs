@@ -8,6 +8,7 @@ impl App for Headlines {
             }
 
     fn update(&mut self, ctx: &eframe::egui::CtxRef, _frame: &eframe::epi::Frame) {
+        self.render_top_panel(ctx);
         self.render_footer(ctx);
         CentralPanel::default().show(ctx, |ui| {
             self.render_header(ui);
